@@ -1,5 +1,4 @@
-import { jwtDecode } from "jwt-decode";
-import React, { useState } from "react";
+import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 export const ProfileLayout = () => {
@@ -7,11 +6,15 @@ export const ProfileLayout = () => {
 
   const links = [
     { label: "Overview", path: "/my/dashboard" },
+    {
+      label:
+        location.pathname === "/my/profile-edit" ? "Profile-Edit" : "Profile",
+      path: "/my/profile",
+    },
     { label: "Orders & Returns", path: "/my/orders" },
     { label: "Coupons", path: "/my/coupons" },
     { label: "Myntra Credit", path: "/my/credit" },
     { label: "MynCash", path: "/my/myncash" },
-    { label: "Profile", path: "/my/profile" },
     { label: "Saved Cards", path: "/my/cards" },
     { label: "Addresses", path: "/my/addresses" },
     { label: "Delete Account", path: "/my/delete-account" },
@@ -29,7 +32,9 @@ export const ProfileLayout = () => {
                 <Link
                   to={link.path}
                   className={`hover:text-purple-600 ${
-                    location.pathname === link.path
+                    location.pathname === link.path ||
+                    (location.pathname === "/my/profile-edit" &&
+                      link.path === "/my/profile")
                       ? "text-purple-600 font-semibold"
                       : ""
                   }`}
@@ -40,8 +45,6 @@ export const ProfileLayout = () => {
             ))}
           </ul>
         </div>
-
-        {/* Right Content */}
         <Outlet />
       </div>
     </section>

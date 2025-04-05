@@ -5,7 +5,6 @@ import { UserNavItems } from "../config";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
-import { HiOutlineUserCircle } from "react-icons/hi2";
 import Avtar from "./Avtar";
 
 export const Header = ({ sidebar, setSidebar }) => {
@@ -15,11 +14,11 @@ export const Header = ({ sidebar, setSidebar }) => {
       behavior: "smooth",
     });
   }
-  const isAuthenticated = localStorage.getItem("token") ? true : false;
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
   const navigate = useNavigate();
   return (
-    <header className="bg-white fixed top-0 left-0 right-0 h-20 shadow-xl z-10">
+    <header className="bg-transparent fixed top-0 left-0 right-0 h-20 shadow-xl z-10">
       <div className="lg:container lg:px-10 md:px-10 px-5 h-20 mx-auto flex gap-2 items-center justify-between">
         <div className="flex gap-5 w-full">
           <div className="text-black text-3xl font-bold ">Logo</div>
@@ -42,7 +41,7 @@ export const Header = ({ sidebar, setSidebar }) => {
                     to={nav.path}
                     className={({ isActive }) =>
                       `cursor-pointer  text-[15px] mb-10 font-bold  focus:text-primary  ${
-                        isActive ? "text-primary" : "!text-black"
+                        isActive ? "text-primary" : "!text-white"
                       }`
                     }
                   >
@@ -56,7 +55,7 @@ export const Header = ({ sidebar, setSidebar }) => {
                   <div
                     className={({ isActive }) =>
                       ` absolute top-12 left-0 right-0   border-red-500 border-b-4  ${
-                        isActive ? "border-primary" : "!border-black"
+                        isActive ? "border-primary" : "!border-white"
                       }`
                     }
                   ></div>
@@ -66,21 +65,19 @@ export const Header = ({ sidebar, setSidebar }) => {
           </nav>
           <IoMdHeartEmpty
             size={37}
-            className="text-black hover:bg-gray-100/40 cursor-pointer rounded-full p-[4px] hover:p-[4.5px]"
+            className="text-white hover:bg-gray-100/40 cursor-pointer rounded-full p-[4px] hover:p-[4.5px]"
           />
           <IoBagHandleOutline
             size={35}
-            className="text-black  hover:bg-gray-100/40 cursor-pointer  rounded-full p-[4px] hover:p-[4.5px]"
+            className="text-white  hover:bg-gray-100/40 cursor-pointer  rounded-full p-[4px] hover:p-[4.5px]"
           />
-          {isAuthenticated ? (
+          {isLoggedIn ? (
             <Avtar
-              AvtarClass={
-                "w-48 duration-500  transition-all lg:mt-20 md:mt-20 mt-[68px] -mr-11"
-              }
+              AvtarClass={"w-52  duration-500  transition-all mt-[90px] -mr-6"}
             />
           ) : (
             <a
-              className="bg-transparent border font-medium hover:scale-[98%] hover:bg-gray-100  px-3 rounded-md  flex items-center  border-black h-[30px]  text-black hover"
+              className="bg-transparent border font-medium hover:scale-[98%] hover:bg-gray-100  px-3 rounded-md  flex items-center  border-white h-[30px]  text-white hover"
               href="/login"
             >
               Login

@@ -1,11 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import { LogOut, User, UserCog } from "lucide-react";
-
-// import {
-
-// } from "../ui/dropdown-menu";
-
 import { Avatar, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -17,19 +11,19 @@ import {
 } from "../ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useSelector } from "react-redux";
 
 const Avtar = ({ hi, AvtarClass }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
-
   const navigate = useNavigate();
 
   function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("userEmail");
     window.location.reload();
   }
+  const { user, loading, error } = useSelector((state) => state.user);
 
   return (
     <Fragment>
@@ -51,6 +45,7 @@ const Avtar = ({ hi, AvtarClass }) => {
             <DropdownMenuLabel className="!py-2.5  px-3">
               <span className={`${hi === false && "hidden"}`}>Hi, </span>
               <span className="capitalize ">
+                {user ? user?.name : ""}
                 {/* {user?.userName?.replace(/(_\d+)$/, "")} */}
               </span>
             </DropdownMenuLabel>

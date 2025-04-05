@@ -78,7 +78,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900  h-20 flex place-content-center items-center">
+      <div className="bg-[#111]  h-20 flex place-content-center items-center">
         @ 2025 www.Ecommerce.com All rights reserved.
       </div>
     </footer>
